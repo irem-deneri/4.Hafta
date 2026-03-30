@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+    padding: 50px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    color: white; /* Yazı rengini beyaz yapıyoruz */
+    
+    /* Arka plan renk geçişi */
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    height: 100vh;
+}
+
+/* Arka planın hareket etmesini sağlayan animasyon */
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Butonları daha belirgin yapmak için ek stil */
+.btn {
+    display: inline-block;
+    padding: 15px 30px;
+    margin: 15px;
+    background: rgba(255, 255, 255, 0.2); /* Yarı saydam beyaz */
+    color: white;
+    text-decoration: none;
+    border: 2px solid white;
+    border-radius: 50px;
+    backdrop-filter: blur(5px); /* Cam efekti */
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: white;
+    color: #e73c7e;
+    transform: scale(1.1);
+}
+
+.profile-pic {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 5px solid white;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
