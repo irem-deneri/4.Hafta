@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moduna Göre Makyaj | Stil Önerileri</title>
+  <meta name="description" content="Günlük moduna göre kişisel makyaj stil önerileri. Mutlu, havalı, romantik ve daha fazlası için senin stilin burada!" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Animated blob background -->
+  <div class="blobs">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+  </div>
+
+  <main class="container">
+    <!-- Hero -->
+    <header class="hero">
+      <div class="hero-icon">💄</div>
+      <h1 class="title">Moduna Göre Makyaj</h1>
+      <p class="subtitle">Bugün nasıl hissediyorsun? Ruhuna göre stilini keşfet ✨</p>
+    </header>
+
+    <!-- Mood Grid -->
+    <section class="mood-section">
+      <h2 class="section-title">Modunu Seç</h2>
+      <div class="mood-grid" id="moodGrid">
+        <!-- JS tarafından doldurulur -->
+      </div>
+    </section>
+
+    <!-- Result Card -->
+    <section class="result-section" id="resultSection">
+      <div class="result-card" id="resultCard">
+        <div class="result-emoji" id="resultEmoji"></div>
+        <h3 class="result-mood-name" id="resultMoodName"></h3>
+        <p class="result-tagline" id="resultTagline"></p>
+        <div class="result-divider"></div>
+        <div class="result-products" id="resultProducts"></div>
+        <div class="result-tips" id="resultTips"></div>
+        <div class="result-palette" id="resultPalette"></div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Sevgiyle yapıldı 💕 • Her mod için ayrı bir güzellik var</p>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
