@@ -1,48 +1,94 @@
-body {
-    margin: 0;
-    padding: 50px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    text-align: center;
-    color: white; /* Yazı rengini beyaz yapıyoruz */
-    
-    /* Arka plan renk geçişi */
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
-    height: 100vh;
-}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İrem Deneri | Portfolyo</title>
+    <style>
+        /* Arka plan renk geçişi ve genel ayarlar */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
 
-/* Arka planın hareket etmesini sağlayan animasyon */
-@keyframes gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
+        /* Kart tasarımı */
+        .portfolio-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
 
-/* Butonları daha belirgin yapmak için ek stil */
-.btn {
-    display: inline-block;
-    padding: 15px 30px;
-    margin: 15px;
-    background: rgba(255, 255, 255, 0.2); /* Yarı saydam beyaz */
-    color: white;
-    text-decoration: none;
-    border: 2px solid white;
-    border-radius: 50px;
-    backdrop-filter: blur(5px); /* Cam efekti */
-    transition: 0.3s;
-}
+        /* Profil resmi ayarları */
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            margin-bottom: 20px;
+        }
 
-.btn:hover {
-    background: white;
-    color: #e73c7e;
-    transform: scale(1.1);
-}
+        h1 {
+            margin: 10px 0;
+            font-size: 2rem;
+            letter-spacing: 1px;
+        }
 
-.profile-pic {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    border: 5px solid white;
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
-}
+        /* Buton ve Link Tasarımları */
+        .links-container {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .btn {
+            text-decoration: none;
+            color: white;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 12px 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn:hover {
+            background: white;
+            color: #764ba2;
+            transform: translateY(-3px);
+        }
+
+        .main-app {
+            background: #ff7eb3; /* Uygulamayı açan link için farklı renk */
+            border: none;
+        }
+
+        .main-app:hover {
+            background: #ff758c;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="portfolio-card">
+        <img src="ekran.jpeg" alt="İrem Deneri" class="profile-img">
+        
+        <h1>İrem Deneri</h1>
+        <p>Veri Bilimi ve Python Geliştirici</p>
+
+        <div class="links-container">
+            <a href="gorsellestirme.py" class="btn main-app">🚀 Uygulamayı Başlat</a>
