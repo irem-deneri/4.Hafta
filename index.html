@@ -1,125 +1,64 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İrem Deneri | Proje Portfolyosu</title>
-    <style>
-        /* Animasyonlu ve Renk Geçişli Arka Plan */
-        body {
-            margin: 0;
-            padding: 20px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Profil ve Başlık Alanı */
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            width: 90%;
-            max-width: 800px;
-        }
-
-        .profile-img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            border: 3px solid white;
-            object-fit: cover;
-        }
-
-        /* İçerik Paneli */
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            width: 95%;
-            max-width: 1200px;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(15px);
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .card h2 {
-            margin-top: 0;
-            font-size: 1.2rem;
-        }
-
-        /* Görsel ve Tablo Ayarları */
-        img.project-result {
-            width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        iframe {
-            width: 100%;
-            height: 300px;
-            background: white;
-            border: none;
-            border-radius: 10px;
-        }
-
-        .btn {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 20px;
-            background: #333;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .btn:hover {
-            background: #000;
-            transform: translateY(-2px);
-        }
-
-        /* Mobil Uyum */
-        @media (max-width: 768px) {
-            .content-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moduna Göre Makyaj | Stil Önerileri</title>
+  <meta name="description"
+    content="Günlük moduna göre kişisel makyaj stil önerileri. Mutlu, havalı, romantik ve daha fazlası için senin stilin burada!" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Nunito:wght@400;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
-    <div class="header">
-        <img src="ekran.jpeg" alt="İrem Deneri" class="profile-img">
-        <h1>İrem Deneri</h1>
-        <p>YKS Veri Analizi ve Görselleştirme Projesi</p>
-    </div>
+  <!-- Animated blob background -->
+  <div class="blobs">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+  </div>
 
-    <div class="content-grid">
-        <div class="card">
-            <h2>📊 Analiz Grafiği</h2>
-            <img src="yks_grafik.png" class="project-result" alt="YKS Grafik Çıktısı">
-            <a href="yks_grafik.png" target="_blank" class="btn">Tam Boyut Gör</a>
-        </div>
+  <main class="container">
+    <!-- Hero -->
+    <header class="hero">
+      <div class="hero-icon">💄</div>
+      <h1 class="title">Moduna Göre Makyaj</h1>
+      <p class="subtitle">Bugün nasıl hissediyorsun? Ruhuna göre stilini keşfet ✨</p>
+    </header>
 
-        <div class="card">
-            <h2>📂 Kaynak Veri Seti (CSV)</h2>
+    <!-- Mood Grid -->
+    <section class="mood-section">
+      <h2 class="section-title">Modunu Seç</h2>
+      <div class="mood-grid" id="moodGrid">
+        <!-- JS tarafından doldurulur -->
+      </div>
+    </section>
+
+    <!-- Result Card -->
+    <section class="result-section" id="resultSection">
+      <div class="result-card" id="resultCard">
+        <div class="result-emoji" id="resultEmoji"></div>
+        <h3 class="result-mood-name" id="resultMoodName"></h3>
+        <p class="result-tagline" id="resultTagline"></p>
+        <div class="result-divider"></div>
+        <div class="result-products" id="resultProducts"></div>
+        <div class="result-tips" id="resultTips"></div>
+        <div class="result-palette" id="resultPalette"></div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Sevgiyle yapıldı 💕 • Her mod için ayrı bir güzellik var</p>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
