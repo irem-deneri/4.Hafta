@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moduna Göre Makyaj | Stil Önerileri</title>
+  <meta name="description"
+    content="Günlük moduna göre kişisel makyaj stil önerileri. Mutlu, havalı, romantik ve daha fazlası için senin stilin burada!" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Nunito:wght@400;600;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    /* ───────────────────────────────────────────
+   ROOT & RESET
+─────────────────────────────────────────── */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --pink: #f472b6;
+      --rose: #fb7185;
+      --purple: #c084fc;
+      --lavender: #a78bfa;
+      --peach: #fb923c;
+      --mint: #34d399;
+      --sky: #38bdf8;
+      --gold: #fbbf24;
+      --cream: #fff7f0;
+      --dark: #1e1024;
+      --glass: rgba(255, 255, 255, 0.15);
+      --glass-b: rgba(255, 255, 255, 0.35);
+      --shadow: 0 8px 32px rgba(180, 60, 120, 0.18);
+      --radius: 24px;
+      --font-h: 'Playfair Display', serif;
+      --font-b: 'Nunito', sans-serif;
+    }
+
+    body {
+      font-family: var(--font-b);
+      min-height: 100vh;
+      background: linear-gradient(135deg, #fce4f4 0%, #ede4ff 50%, #fce4f4 100%);
+      color: var(--dark);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ───────────────────────────────────────────
+   ANIMATED BLOB BACKGROUND
+─────────────────────────────────────────── */
+    .blobs {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.45;
+      animation: blobFloat 12s ease-in-out infinite alternate;
+    }
+
+    .b1 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, #f9a8d4, #f472b6);
+      top: -120px;
+      left: -100px;
+      animation-delay: 0s;
+    }
+
+    .b2 {
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, #c4b5fd, #8b5cf6);
+      bottom: -80px;
+      right: -80px;
+      animation-delay: 4s;
+    }
+
+    .b3 {
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, #fde68a, #fb923c);
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation-delay: 8s;
+    }
+
+    @keyframes blobFloat {
+      0% {
+        transform: translateY(0) scale(1);
+      }
+
+      100% {
+        transform: translateY(40px) scale(1.08);
+      }
+    }
+
+    /* ───────────────────────────────────────────
+   CONTAINER
+─────────────────────────────────────────── */
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+    }
+
+    /* ───────────────────────────────────────────
+   HERO
+─────────────────────────────────────────── */
+    .hero {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+
+    .hero-icon {
+      font-size: 64px;
+      margin-bottom: 12px;
+      display: block;
+      animation: bounce 2.5s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .title {
+      font-family: var(--font-h);
+      font-size: clamp(2rem, 6vw, 3.4rem);
+      background: linear-gradient(135deg, var(--rose), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: #7c4d7a;
+      font-weight: 600;
+    }
+
+    /* ───────────────────────────────────────────
+   SECTION TITLES
+─────────────────────────────────────────── */
+    .section-title {
+      font-family: var(--font-h);
+      font-size: 1.5rem;
+      text-align: center;
+      color: #6b2d6b;
+      margin-bottom: 28px;
+    }
+
+    /* ───────────────────────────────────────────
+   MOOD GRID
+─────────────────────────────────────────── */
+    .mood-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 18px;
+    }
+
+    .mood-btn {
+      background: var(--glass);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 2px solid rgba(255, 255, 255, 0.55);
+      border-radius: 20px;
+      padding: 22px 10px;
+      cursor: pointer;
+      font-family: var(--font-b);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--dark);
+      text-align: center;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .mood-btn .mood-emoji {
+      font-size: 2.6rem;
+      display: block;
+      margin-bottom: 8px;
+      line-height: 1;
+      transition: transform 0.3s ease;
+    }
+
+    .mood-btn:hover {
+      transform: translateY(-6px) scale(1.04);
+      box-shadow: 0 16px 40px rgba(180, 60, 120, 0.28);
+      border-color: var(--pink);
+      background: var(--glass-b);
+    }
+
+    .mood-btn:hover .mood-emoji {
+      transform: scale(1.15) rotate(-5deg);
+    }
+
+    .mood-btn.active {
+      border-color: var(--rose);
+      background: linear-gradient(135deg, rgba(251, 113, 133, 0.22), rgba(192, 132, 252, 0.22));
+      box-shadow: 0 0 0 3px rgba(251, 113, 133, 0.5), var(--shadow);
+      transform: translateY(-4px) scale(1.04);
+    }
+
+    /* ───────────────────────────────────────────
+   RESULT SECTION
+─────────────────────────────────────────── */
+    .result-section {
+      margin-top: 50px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      pointer-events: none;
+    }
+
+    .result-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .result-card {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      border-radius: var(--radius);
+      padding: 40px 36px;
+      box-shadow: 0 12px 48px rgba(180, 60, 120, 0.18);
+      text-align: center;
+    }
+
+    .result-emoji {
+      font-size: 72px;
+      display: block;
+      margin-bottom: 10px;
+      animation: popIn 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @keyframes popIn {
+      0% {
+        transform: scale(0.4);
+        opacity: 0;
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .result-mood-name {
+      font-family: var(--font-h);
+      font-size: 2rem;
+      background: linear-gradient(135deg, var(--rose), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 6px;
+    }
+
+    .result-tagline {
+      font-size: 1rem;
+      color: #7c4d7a;
+      font-weight: 600;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .result-divider {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--pink), var(--purple), transparent);
+      border-radius: 2px;
+      margin: 0 auto 24px;
+      max-width: 300px;
+    }
+
+    /* Products */
+    .result-products {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 22px;
+    }
+
+    .product-tag {
+      background: linear-gradient(135deg, var(--rose), var(--purple));
+      color: white;
+      border-radius: 50px;
+      padding: 6px 16px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(251, 113, 133, 0.3);
+      animation: fadeUp 0.4s ease both;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Tips */
+    .result-tips {
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 14px;
+      padding: 16px 20px;
+      text-align: left;
+      margin-bottom: 22px;
+      border: 1.5px solid rgba(255, 255, 255, 0.9);
+    }
+
+    .tip-title {
+      font-weight: 700;
+      color: var(--rose);
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+
+    .tip-item {
+      font-size: 0.9rem;
+      color: #4a2060;
+      line-height: 1.7;
+      padding-left: 4px;
+    }
+
+    /* Palette */
+    .result-palette {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .palette-swatch {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transition: transform 0.2s ease;
+    }
+
+    .palette-swatch:hover {
+      transform: scale(1.2);
+    }
+
+    .palette-label {
+      font-size: 0.75rem;
+      color: #7c4d7a;
+      text-align: center;
+      margin-top: 4px;
+    }
+
+    /* ───────────────────────────────────────────
+   FOOTER
+─────────────────────────────────────────── */
+    .footer {
+      text-align: center;
+      margin-top: 60px;
+      font-size: 0.85rem;
+      color: #9d7099;
+      font-weight: 600;
+    }
+
+    /* ───────────────────────────────────────────
+   RESPONSIVE
+─────────────────────────────────────────── */
+    @media (max-width: 500px) {
+      .result-card {
+        padding: 28px 18px;
+      }
+
+      .mood-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Animated blob background -->
+  <div class="blobs">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+  </div>
+
+  <main class="container">
+    <!-- Hero -->
+    <header class="hero">
+      <div class="hero-icon">💄</div>
+      <h1 class="title">Moduna Göre Makyaj</h1>
+      <p class="subtitle">Bugün nasıl hissediyorsun? Ruhuna göre stilini keşfet ✨</p>
+    </header>
+
+    <!-- Mood Grid -->
+    <section class="mood-section">
+      <h2 class="section-title">Modunu Seç</h2>
+      <div class="mood-grid" id="moodGrid">
+        <!-- JS tarafından doldurulur -->
+      </div>
+    </section>
+
+    <!-- Result Card -->
+    <section class="result-section" id="resultSection">
+      <div class="result-card" id="resultCard">
+        <div class="result-emoji" id="resultEmoji"></div>
+        <h3 class="result-mood-name" id="resultMoodName"></h3>
+        <p class="result-tagline" id="resultTagline"></p>
+        <div class="result-divider"></div>
+        <div class="result-products" id="resultProducts"></div>
+        <div class="result-tips" id="resultTips"></div>
+        <div class="result-palette" id="resultPalette"></div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Sevgiyle yapıldı 💕 • Her mod için ayrı bir güzellik var</p>
+    </footer>
+  </main>
+
+  <script>
+    const MOODS = [
+      {
+        id: "mutlu",
+        label: "Mutlu",
+        emoji: "😄",
+        tagline: "Enerji dolu, canlı ve göz alıcı bir görünüm!",
+        products: ["Renkli Far", "Parlak Ruj", "Işıltılı Highlighter", "Maskara"],
+        tips: [
+          "💡 Taze ve canlı görünmek için pembe ya da kırmızı tonlu ruj seç.",
+          "✨ Far yerine glitter liner dene — gözlerin parıldayacak!",
+          "🌸 Allığı hafifçe elmacık kemiklerine uygula."
+        ],
+        palette: ["#f472b6", "#fb7185", "#fde68a", "#f9a8d4", "#fca5a5"]
+      },
+      {
+        id: "uzgun",
+        label: "Üzgün",
+        emoji: "🥺",
+        tagline: "Sakin, hassas bir güzellik. Kendine nazik ol.",
+        products: ["Nude Ruj", "BB Krem", "Kapatıcı", "Şeffaf Kaş Jeli"],
+        tips: [
+          "💡 Hafif bir CC krem veya BB krem; derini dinlendiriyor.",
+          "🌿 Alt göz kapağına açık bej far sürerek gözleri büyük göster.",
+          "💧 Dumanlı göz yerine yumuşak bir kahve far tercih et."
+        ],
+        palette: ["#a78bfa", "#c4b5fd", "#ddd6fe", "#e0d9f0", "#f5f0ff"]
+      },
+      {
+        id: "heyecanli",
+        label: "Heyecanlı",
+        emoji: "🤩",
+        tagline: "Tüm odanın dikkatini çek — bugün sen parlıyorsun!",
+        products: ["Renkli Eyeliner", "Glitter Far", "Canlı Ruj", "Kirpik Bigudi"],
+        tips: [
+          "🔥 Mavi, yeşil ya da mor bir eyeliner dene.",
+          "💥 Üst kapağa glitter far, alt kapağa parlak beyaz far sürerek gözleri büyüt.",
+          "💄 Seksi kırmızı veya koyu bordo bir ruj makyajı tamamlar."
+        ],
+        palette: ["#e879f9", "#f43f5e", "#fb923c", "#fbbf24", "#34d399"]
+      },
+      {
+        id: "sakin",
+        label: "Sakin",
+        emoji: "😌",
+        tagline: "Minimal ama etkileyici — 'no-makeup makeup' günün.",
+        products: ["Lip Balm", "Şeffaf Fondöten", "Kapatıcı", "Jel Rimel"],
+        tips: [
+          "🌿 Derini önce nemlendirici ile hazırla.",
+          "☁️ Sadece kapatıcı ve şeffaf fondöten; ten görünümü çok sağlıklı olacak.",
+          "👄 Tinted lip balm ile dudaklarına renk ver, lipstick gerekmez."
+        ],
+        palette: ["#6ee7b7", "#a7f3d0", "#bfdbfe", "#ddd6fe", "#fff7ed"]
+      },
+      {
+        id: "havali",
+        label: "Havalı",
+        emoji: "😎",
+        tagline: "Grafik çizgiler, güçlü kontür — vibe baskın!",
+        products: ["Grafik Eyeliner", "Kontür", "Mat Ruj", "Kaş Kalemi"],
+        tips: [
+          "🖤 Siyah grafik eyeliner ile winged liner veya floating liner dene.",
+          "🔳 Kontürü doğal olmayan bir şekilde uygula — geometrik gölgeler trend!",
+          "💋 Mat, koyu tonlu bir ruj (vişne, kahve, bordo) kombinasyonu güçlü görüntüler."
+        ],
+        palette: ["#1e1e2e", "#6b21a8", "#7c3aed", "#4f4f4f", "#dc2626"]
+      },
+      {
+        id: "romantik",
+        label: "Romantik",
+        emoji: "🌹",
+        tagline: "Pembe bulanık, nazik ve aşkla dolu bir stil.",
+        products: ["Pembe Far", "Gül Allığı", "Şeffaf Gloss", "Kirpik Bigudi"],
+        tips: [
+          "🌸 Tüm yüze yayılmış pembe bir allık uygulaması sevimli ve taze gösterir.",
+          "💗 Göz makyajında babycore estetiğinden ilham al: parlak, yuvarlak göz.",
+          "🍑 Şeffaf dudak glossu renk verirken ışıltı da ekler."
+        ],
+        palette: ["#fda4af", "#f9a8d4", "#fbcfe8", "#fce7f3", "#fff1f2"]
+      },
+      {
+        id: "enerjik",
+        label: "Enerjik",
+        emoji: "⚡",
+        tagline: "Sporcu ruhu, ferah ten — gün sana ait!",
+        products: ["Su Bazlı Fondöten", "Jel Eyeliner", "Suya Dayanıklı Maskara", "SPF Ruj"],
+        tips: [
+          "💦 Su bazlı fondöten ve suya dayanıklı maskara aktif bir gün için şart.",
+          "⚡ Turuncu veya sarı eyeliner ile enerjini yüzüne yansıt.",
+          "🌞 SPF içeren bir renkli lip balm hem korur hem güzelleştirir."
+        ],
+        palette: ["#fbbf24", "#fb923c", "#f97316", "#84cc16", "#2dd4bf"]
+      },
+      {
+        id: "sinav",
+        label: "Sınav",
+        emoji: "🎓",
+        tagline: "Sıfır makyaj, bol özgüven! Sen bu işi halledersin 💪",
+        products: ["Nemlendirici", "Göz Altı Kapatıcı", "Şeffaf Lip Balm", "SPF"],
+        tips: [
+          "📚 Makyaja değil, başarına odaklan!",
+          "💧 Bol su içmek teni en iyi nemlendirir.",
+          "✨ Göz altı kapatıcısı yeterli — dinç görünürsün."
+        ],
+        palette: ["#93c5fd", "#a5f3fc", "#bbf7d0", "#fde68a", "#fca5a5"]
+      }
+    ];
+
+    const moodGrid = document.getElementById('moodGrid');
+    const resultSection = document.getElementById('resultSection');
+    const resultEmoji = document.getElementById('resultEmoji');
+    const resultMoodName = document.getElementById('resultMoodName');
+    const resultTagline = document.getElementById('resultTagline');
+    const resultProducts = document.getElementById('resultProducts');
+    const resultTips = document.getElementById('resultTips');
+    const resultPalette = document.getElementById('resultPalette');
+
+    let activeBtn = null;
+
+    // Build mood buttons
+    MOODS.forEach(mood => {
+      const btn = document.createElement('button');
+      btn.className = 'mood-btn';
+      btn.setAttribute('id', `mood-${mood.id}`);
+      btn.innerHTML = `<span class="mood-emoji">${mood.emoji}</span>${mood.label}`;
+      btn.addEventListener('click', () => showResult(mood, btn));
+      moodGrid.appendChild(btn);
+    });
+
+    function showResult(mood, btn) {
+      // Active state
+      if (activeBtn) activeBtn.classList.remove('active');
+      btn.classList.add('active');
+      activeBtn = btn;
+
+      // Populate
+      resultEmoji.textContent = mood.emoji;
+      resultMoodName.textContent = mood.label + ' Modu';
+      resultTagline.textContent = mood.tagline;
+
+      // Products
+      resultProducts.innerHTML = '';
+      mood.products.forEach((p, i) => {
+        const tag = document.createElement('span');
+        tag.className = 'product-tag';
+        tag.textContent = p;
+        tag.style.animationDelay = `${i * 0.07}s`;
+        resultProducts.appendChild(tag);
+      });
+
+      // Tips
+      resultTips.innerHTML = `<div class="tip-title">💡 Uygulama İpuçları</div>` +
+        mood.tips.map(t => `<div class="tip-item">${t}</div>`).join('');
+
+      // Palette
+      resultPalette.innerHTML = mood.palette.map(c =>
+        `<div style="text-align:center">
+       <div class="palette-swatch" style="background:${c}; margin:0 auto;"></div>
+       <div class="palette-label">${c}</div>
+     </div>`
+      ).join('');
+
+      // Show section
+      resultSection.classList.remove('visible');
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          resultSection.classList.add('visible');
+          resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+    }
+
+  </script>
+</body>
+
+</html>
