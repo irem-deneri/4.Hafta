@@ -5,76 +5,121 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>İrem Deneri | Proje Portfolyosu</title>
     <style>
-        /* Canlı ve Hareketli Renk Geçişli Arka Plan */
+        /* Animasyonlu ve Renk Geçişli Arka Plan */
         body {
             margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(-45deg, #23a6d5, #23d5ab, #e73c7e, #ee7752);
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
             background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+            animation: gradient 15s ease infinite;
             color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        @keyframes gradientBG {
+        @keyframes gradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        /* Cam (Glassmorphism) Efektli Kart */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 25px;
-            padding: 40px;
-            width: 320px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        /* Profil ve Başlık Alanı */
+        .header {
             text-align: center;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            width: 90%;
+            max-width: 800px;
         }
 
-        /* Profil Fotoğrafı */
-        .profile-pic {
-            width: 120px;
-            height: 120px;
+        .profile-img {
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             border: 3px solid white;
-            margin-bottom: 15px;
             object-fit: cover;
+        }
+
+        /* İçerik Paneli */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 95%;
+            max-width: 1200px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            font-size: 1.2rem;
+        }
+
+        /* Görsel ve Tablo Ayarları */
+        img.project-result {
+            width: 100%;
+            border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        h1 {
-            font-size: 24px;
-            margin: 10px 0;
-            font-weight: 700;
-        }
-
-        p {
-            font-size: 14px;
-            margin-bottom: 25px;
-            opacity: 0.8;
-        }
-
-        /* Buton Grubu */
-        .button-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+        iframe {
+            width: 100%;
+            height: 300px;
+            background: white;
+            border: none;
+            border-radius: 10px;
         }
 
         .btn {
-            display: block;
-            padding: 12px;
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #333;
+            color: white;
             text-decoration: none;
-            color: #333;
-            background-color: white;
-            border-radius: 12px;
-            font-weight: 600;
-            font
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #000;
+            transform: translateY(-2px);
+        }
+
+        /* Mobil Uyum */
+        @media (max-width: 768px) {
+            .content-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <img src="ekran.jpeg" alt="İrem Deneri" class="profile-img">
+        <h1>İrem Deneri</h1>
+        <p>YKS Veri Analizi ve Görselleştirme Projesi</p>
+    </div>
+
+    <div class="content-grid">
+        <div class="card">
+            <h2>📊 Analiz Grafiği</h2>
+            <img src="yks_grafik.png" class="project-result" alt="YKS Grafik Çıktısı">
+            <a href="yks_grafik.png" target="_blank" class="btn">Tam Boyut Gör</a>
+        </div>
+
+        <div class="card">
+            <h2>📂 Kaynak Veri Seti (CSV)</h2>
