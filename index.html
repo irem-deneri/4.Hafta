@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İrem Deneri | Portfolyo</title>
+    <title>İrem Deneri Portfolyo</title>
     <style>
-        /* Canlı ve Hareketli Renk Geçişli Arka Plan */
+        /* Hareketli Renkli Arka Plan */
         body {
             margin: 0;
             padding: 0;
@@ -13,11 +13,10 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(-45deg, #FF3CAC, #784BA0, #2B86C5, #00DBDE);
             background-size: 400% 400%;
-            animation: gradientBG 12s ease infinite;
-            overflow: hidden;
+            animation: gradientBG 10s ease infinite;
         }
 
         @keyframes gradientBG {
@@ -26,93 +25,62 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Cam (Glassmorphism) Efektli Kart */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 30px;
-            padding: 50px 30px;
-            width: 340px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        /* Cam Efekti Kart */
+        .card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            padding: 40px 20px;
+            width: 320px;
             text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             color: white;
         }
 
-        /* Profil Fotoğrafı */
         .profile-img {
-            width: 140px;
-            height: 140px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            border: 4px solid rgba(255, 255, 255, 0.5);
-            margin-bottom: 20px;
+            border: 4px solid white;
+            margin-bottom: 15px;
             object-fit: cover;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
 
-        h1 {
-            font-size: 28px;
-            margin: 10px 0;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
+        h1 { margin: 10px 0; font-size: 24px; }
+        p { margin-bottom: 25px; opacity: 0.9; font-size: 14px; }
 
-        p {
-            font-size: 15px;
-            margin-bottom: 35px;
-            opacity: 0.9;
-        }
-
-        /* Buton Grubu */
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
+        /* Butonlar */
         .btn {
             display: block;
-            padding: 14px;
+            padding: 12px;
+            margin: 10px 0;
             text-decoration: none;
             color: #333;
             background: white;
-            border-radius: 15px;
-            font-weight: 600;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            font-weight: bold;
+            transition: 0.3s;
         }
 
         .btn:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
             background: #333;
             color: white;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-        }
-
-        /* Uygulama butonu için özel stil */
-        .btn-app {
-            background: #ffebf2;
-            color: #784BA0;
         }
     </style>
 </head>
 <body>
 
-    <div class="glass-card">
-        <img src="ekran.jpeg" alt="İrem Deneri" class="profile-img">
-        
+    <div class="card">
+        <img src="ekran.jpeg" alt="Profil" class="profile-img">
         <h1>İrem Deneri</h1>
         <p>4. Hafta Proje Çalışmaları</p>
 
-        <div class="btn-group">
-            <a href="makyaj_stili.html" class="btn btn-app">✨ Uygulamayı Başlat</a>
-            
-            <a href="can_egrisi_grafigi.png" target="_blank" class="btn">📊 Analiz Grafiğini Gör</a>
-            
-            <a href="makyaj_verisi.csv" target="_blank" class="btn">📂 Veri Setini (CSV) İncele</a>
-        </div>
+        <a href="makyaj_stili.html" class="btn">✨ Uygulamayı Başlat</a>
+        <a href="can_egrisi_grafigi.png" target="_blank" class="btn">📊 Analiz Grafiği</a>
+        <a href="makyaj_verisi.csv" target="_blank" class="btn">📂 Veri Seti (CSV)</a>
     </div>
 
 </body>
