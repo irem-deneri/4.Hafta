@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlowMood - Ruh Hâline Göre Makyaj</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: rgba(30, 41, 59, 0.7);
+            --primary: #ec4899;
+            --primary-hover: #db2777;
+            --secondary: #8b5cf6;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(236, 72, 153, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        p.subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        /* Screens */
+        .screen {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+        }
+
+        .option-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            padding: 15px;
+            border-radius: 12px;
+            color: var(--text-main);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .option-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .option-btn.selected {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-color: transparent;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(236, 72, 153, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Mood Screen */
+        .mood-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .mood-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            padding: 20px;
+            border-radius: 16px;
+            color: var(--text-main);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mood-btn span.emoji {
+            font-size: 2.5rem;
+        }
+
+        .mood-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.05);
+            border-color: var(--primary);
+        }
+
+        /* Result Screen */
+        .result-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .makeup-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .makeup-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .makeup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .makeup-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .makeup-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 5px;
+        }
+
+        .click-hint {
+            font-size: 0.8rem;
+            color: var(--secondary);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        /* Options Modal inside Item */
+        .shade-options {
+            display: none;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--glass-border);
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .shade-card {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .shade-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .shade-brand {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .tag {
+            background: rgba(236, 72, 153, 0.2);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            color: var(--primary);
+        }
+
+        .back-btn {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--glass-border);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+            transition: all 0.3s ;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        /* Personalized greeting */
+        #user-profile-summary {
+            background: linear-gradient(135deg, rgba(236,72,153,0.1), rgba(139,92,246,0.1));
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 0.95rem;
+            border: 1px solid rgba(236,72,153,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- SCREEN 1: User Profile -->
+        <div id="screen-profile" class="screen active">
+            <h1>GlowMood</h1>
+            <p class="subtitle">Seni tanıyarak başlayalım. Kusursuz makyajın sırrı tonlardadır.</p>
+
+            <div class="form-group">
+                <label>Ten Renginiz:</label>
+                <div class="options-grid" id="skin-tone-options">
+                    <button class="option-btn" data-value="Acik">Açık / Beyaz</button>
+                    <button class="option-btn" data-value="Bugday">Buğday</button>
+                    <button class="option-btn" data-value="Esmer">Esmer / Koyu</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Saç Renginiz:</label>
+                <div class="options-grid" id="hair-color-options">
+                    <button class="option-btn" data-value="Sari">Sarı / Açık</button>
+                    <button class="option-btn" data-value="Kumral">Kumral</button>
+                    <button class="option-btn" data-value="KahveSiyah">Koyu / Siyah</button>
+                    <button class="option-btn" data-value="Kizil">Kızıl / Bakır</button>
+                </div>
+            </div>
+
+            <button id="btn-next-mood" class="btn-primary" disabled>Devam Et</button>
+        </div>
+
+        <!-- SCREEN 2: Mood Selection -->
+        <div id="screen-mood" class="screen">
+            <h1>Nasıl Hissediyorsun?</h1>
+            <p class="subtitle">Bugünkü moduna en uygun makyaj stilini bulalım ve markalarıyla önerelim.</p>
+
+            <div class="mood-grid">
+                <button class="mood-btn" data-mood="mutlu">
+                    <span class="emoji">✨</span>
+                    <span>Mutlu & Canlı</span>
+                </button>
+                <button class="mood-btn" data-mood="romantik">
+                    <span class="emoji">🌸</span>
+                    <span>Romantik</span>
+                </button>
+                <button class="mood-btn" data-mood="guclu">
+                    <span class="emoji">🔥</span>
+                    <span>Özgüvenli & Güçlü</span>
+                </button>
+                <button class="mood-btn" data-mood="yorgun">
+                    <span class="emoji">☕</span>
+                    <span>Yorgun / Halsiz</span>
+                </button>
+                <button class="mood-btn" data-mood="dogal">
+                    <span class="emoji">🌿</span>
+                    <span>Sakin & Doğal</span>
+                </button>
+                <button class="mood-btn" data-mood="enerjik">
+                    <span class="emoji">⚡</span>
+                    <span>Enerjik</span>
+                </button>
+            </div>
+            <button class="back-btn" onclick="showScreen('profile')">Geri Dön</button>
+        </div>
+
+        <!-- SCREEN 3: Recommendations -->
+        <div id="screen-result" class="screen">
+            <div id="user-profile-summary"></div>
+            
+            <div class="result-header">
+                <h1 id="result-title">Senin İçin Makyaj Stili</h1>
+                <p id="result-desc" class="subtitle">Aşağıdaki adımlara tıkla, tenine uygun rastgele renk seçeneklerini ve markaları keşfet!</p>
+            </div>
+
+            <div id="makeup-items-container">
+                <!-- Items injected here by JS -->
+            </div>
+
+            <button class="btn-primary" onclick="reGenerateResults()">Rastgele Yeni Tonlar Getir</button>
+            <button class="back-btn" onclick="showScreen('mood')">Modunu Değiştir</button>
+        </div>
+    </div>
+
+    <script>
+        // Data Base for Makeup Suggestions with intelligent filtering based on tone and hair
+        
+        const productsDatabase = {
+            eyes: [
+                { name: 'Şampanya Işıltısı', type: 'Işıltılı Far', brand: 'Charlotte Tilbury (Pillow Talk)', tones: ['Acik', 'Bugday'], hair: ['Sari', 'Kumral', 'KahveSiyah', 'Kizil'], mood: ['mutlu', 'romantik'] },
+                { name: 'Altın-Bronz Karışımı', type: 'Metalik Far', brand: 'Natasha Denona (Bronze Palette)', tones: ['Bugday', 'Esmer'], hair: ['Kumral', 'KahveSiyah', 'Kizil'], mood: ['mutlu', 'enerjik', 'guclu'] },
+                { name: 'Yumuşak Gül Kurusu', type: 'Mat Far', brand: 'Huda Beauty (New Nude)', tones: ['Acik', 'Bugday', 'Esmer'], hair: ['Sari', 'Kumral', 'KahveSiyah', 'Kizil'], mood: ['romantik', 'dogal'] },
+                { name: 'Keskin Siyah Eyeliner', type: 'Eyeliner', brand: 'KVD Beauty (Tattoo Liner)', tones: ['Acik', 'Bugday', 'Esmer'], hair: ['Sari', 'Kumral', 'KahveSiyah', 'Kizil'], mood: ['guclu', 'enerjik'] },
+                { name: 'Açık Şeftali Tonu', type: 'Likit Far', brand: 'Rare Beauty', tones: ['Acik', 'Bugday'], hair: ['Sari', 'Kizil', 'Kumral'], mood: ['dogal', 'mutlu'] },
+                { name: 'Koyu Kahve Dumanlı', type: 'Mat Far', brand: 'MAC (Brun)', tones: ['Bugday', 'Esmer'], hair: ['KahveSiyah', 'Kumral'], mood: ['guclu', 'romantik'] },
+                { name: 'Aydınlık İç Köşe Pırıltısı', type: 'Aydınlatıcı Far', brand: 'Fenty Beauty (Diamond Bomb)', tones: ['Acik', 'Bugday', 'Esmer'], hair: ['Sari', 'Kumral', 'KahveSiyah', 'Kizil'], mood: ['yorgun', 'mutlu'] },
+                { name: 'Bakır / Kızıl Işıltı', type: 'Krem Far', brand: 'Tom Ford (Golden Peach)', tones: ['Bugday', 'Esmer'], hair: ['Kizil', 'KahveSiyah', 'Kumral'], mood: ['enerjik', 'guclu'] },
+                { name: 'Soft Lila Pastel', type: 'Pudra Far', brand: 'ColourPop', tones: ['Acik'], hair: ['Sari', 'Kumral'], mood: ['romantik', 'mutlu'] },
+                { name: 'Nude Göz Bazı (Sade)', type: 'Kapatıcı/Baz', brand: 'NARS (Smudge Proof)', tones: ['Acik', 'Bugday', 'Esmer'], hair: ['Sari', 'Kumral', 'KahveSiyah', 'Kizil'], mood: ['yorgun', 'dogal'] }
+            ],
+            lips: [
+                { name: 'Klasik Soğuk Alt Tonlu Kırmızı', type: 'Likit Mat Ruj', brand: 'MAC (Ruby Woo)', tones: ['Acik', 'Bugday', 'Esmer'], hair: ['Sari', 'KahveSiyah'], mood: ['guclu'] },
+                { name: 'Sıcak Alt Tonlu Kiremit', type: 'Mat Ruj', brand: 'MAC (Chili)', tones: ['Bugday', 'Esmer'], hair: ['Kumral', 'Kizil', 'KahveSiyah'], mood: ['guclu', 'enerjik'] },
+                { name: 'Mükemmel Nude Pembe', type: 'Saten Ruj', brand: 'Charlotte Tilbury (Pillow Talk)', tones: ['Acik', 'Bugday'], hair: ['Sari', 'Kumral', 'KahveSiyah', 'Kizil'], mood: ['romantik', 'dogal'] },
+                { name: 'Şeftali Nude', type: 'Parlatıcı (Gloss)', brand: 'Fenty Beauty (Gloss Bomb - Fenty Glow)', tones: ['Bugday', 'Esmer'], hair: ['Kumral', 'KahveSiyah', 'Kizil'], mood: ['mutlu', 'dogal'] },
+                { name: 'Canlı Nar Çiçeği', type: 'Parlak Ruj', brand: 'Dior (Dior Addict)', tones: ['Acik', 'Bugday'], hair: ['Sari', 'KahveSiyah'], mood: ['mutlu', 'enerjik'] },
+                { name: 'Gül Kurusu Tint', type: 'Lip Tint', brand: 'Benetint (Benefit)', tones: ['Acik', 'Bugday', 'Esmer'], hair: ['Sari', 'Kumral', 'KahveSiyah', 'Kizil'], mood: ['yorgun', 'dogal', 'romantik'] },
+                { name: 'Nemlendirici Nude Balsam', type: 'Renkli Dudak Kremi', brand: 'Clinique (Black Honey)', tones: ['Acik', 'Bugday', 'Esmer'], hair: ['Sari', 'Kumral', 'KahveSiyah', 'Kizil'], mood: ['yorgun', 'dogal'] },
+                { name: 'Koyu Bordo / Şarap', type: 'Mat Ruj', brand: 'NARS (Vamp)', tones: ['Acik', 'Esmer'], hair: ['KahveSiyah', 'Kizil'], mood: ['guclu'] }
+            ],
+            face: [
+                { name: 'Canlı Pembe Allık', type: 'Krem Allık', brand: 'Rare Beauty (Happy)', tones: ['Acik', 'Bugday'], hair: ['Sari', 'Kumral', 'Kizil'], mood: ['mutlu', 'romantik', 'enerjik'] },
+                { name: 'Işıltılı Şeftali Allık', type: 'Toz Allık', brand: 'NARS (Orgasm)', tones: ['Acik', 'Bugday', 'Esmer'], hair: ['Sari', 'Kumral', 'KahveSiyah', 'Kizil'], mood: ['mutlu', 'enerjik', 'yorgun'] },
+                { name: 'Koyu İncir / Berry Allık', type: 'Krem Allık', brand: 'Fenty Beauty (Summertime Wine)', tones: ['Bugday', 'Esmer'], hair: ['KahveSiyah', 'Kizil'], mood: ['romantik', 'guclu'] },
+                { name: 'Aydınlık Veren Kapatıcı', type: 'Kapatıcı', brand: 'Tarte (Shape Tape) / YSL (Touche Eclat)', tones: ['Acik', 'Bugday', 'Esmer'], hair: ['Sari', 'Kumral', 'KahveSiyah', 'Kizil'], mood: ['yorgun', 'dogal'] },
+                { name: 'Keskin Kontür', type: 'Kontür Stick', brand: 'Anastasia Beverly Hills', tones: ['Acik', 'Bugday', 'Esmer'], hair: ['Sari', 'Kumral', 'KahveSiyah', 'Kizil'], mood: ['guclu'] },
+                { name: 'Bronzer Havası', type: 'Sıcak Bronzer', brand: 'Benefit (Hoola)', tones: ['Bugday', 'Esmer'], hair: ['Sari', 'Kumral', 'KahveSiyah'], mood: ['mutlu', 'enerjik', 'dogal'] },
+                { name: 'Glass Skin Aydınlatıcı', type: 'Likit Aydınlatıcı', brand: 'Charlotte Tilbury (Flawless Filter)', tones: ['Acik', 'Bugday', 'Esmer'], hair: ['Sari', 'Kumral', 'KahveSiyah', 'Kizil'], mood: ['mutlu', 'yorgun'] },
+                { name: 'Yok Gibi Doğal Allık', type: 'Likit Likit', brand: 'Glossier (Cloud Paint)', tones: ['Acik', 'Bugday', 'Esmer'], hair: ['Sari', 'Kumral', 'KahveSiyah', 'Kizil'], mood: ['dogal', 'yorgun'] }
+            ]
+        };
+
+        const moodTitles = {
+            'mutlu': { title: '✨ İçten Gelen Işıltı', desc: 'Mutluluğunu yüzüne yansıtacak taze, parlak ve canlı bir makyaj stili.' },
+            'romantik': { title: '🌸 Soft & Elegan', desc: 'Pembe ve şeftali tonlarının hakim olduğu, yumuşak geçişli romantik bir görünüm.' },
+            'guclu': { title: '🔥 Keskin & İddialı', desc: 'Varlığını belli eden belirgin hatlar ve iddialı çarpıcı renkler.' },
+            'yorgun': { title: '☕ Tazeleyici & Canlandırıcı', desc: 'Yorgunluğu silip atan, cildi aydınlık ve uyanık gösteren kurtarıcı dokunuşlar.' },
+            'dogal': { title: '🌿 "Yok Gibi" Makyaj (No-Makeup)', desc: 'Sadece güzelliğini vurgulayan, abartıdan uzak taze bir görünüm.' },
+            'enerjik': { title: '⚡ Dinamik & Renkli', desc: 'Günü yakalamanı sağlayacak, canlı ve sıcak alt tonlu enerjik bir stil.' }
+        };
+
+        let userSkinTone = '';
+        let userHairColor = '';
+        let userMood = '';
+
+        // UI Interactions
+        function setupSelections() {
+            // Skin Tone
+            document.querySelectorAll('#skin-tone-options .option-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('#skin-tone-options .option-btn').forEach(b => b.classList.remove('selected'));
+                    e.target.classList.add('selected');
+                    userSkinTone = e.target.dataset.value;
+                    checkProfileComplete();
+                });
+            });
+
+            // Hair Color
+            document.querySelectorAll('#hair-color-options .option-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('#hair-color-options .option-btn').forEach(b => b.classList.remove('selected'));
+                    e.target.classList.add('selected');
+                    userHairColor = e.target.dataset.value;
+                    checkProfileComplete();
+                });
+            });
+
+            // Next Button
+            document.getElementById('btn-next-mood').addEventListener('click', () => {
+                showScreen('mood');
+            });
+
+            // Mood Buttons
+            document.querySelectorAll('.mood-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    userMood = e.currentTarget.dataset.mood;
+                    generateMakeupRoutine();
+                    showScreen('result');
+                });
+            });
+        }
+
+        function checkProfileComplete() {
+            if (userSkinTone && userHairColor) {
+                document.getElementById('btn-next-mood').removeAttribute('disabled');
+            }
+        }
+
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('screen-' + screenId).classList.add('active');
+        }
+
+        // Random Selection Helper
+        function getRandomItems(array, count) {
+            const shuffled = array.sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+
+        // Filter products based on user profile and mood
+        function getSuitableProducts(category) {
+            const allProducts = productsDatabase[category];
+            
+            // First try to match everything: skin tone + hair + mood
+            let matching = allProducts.filter(p => 
+                p.tones.includes(userSkinTone) && 
+                p.hair.includes(userHairColor) && 
+                p.mood.includes(userMood)
+            );
+
+            // Fallback 1: If too few, ignore hair color but keep skin tone and mood
+            if (matching.length < 2) {
+                matching = allProducts.filter(p => 
+                    p.tones.includes(userSkinTone) && 
+                    p.mood.includes(userMood)
+                );
+            }
+
+            // Fallback 2: If still too few, just match mood
+            if (matching.length < 2) {
+                matching = allProducts.filter(p => p.mood.includes(userMood));
+            }
+            
+            // Fallback 3: If absolutely nothing matches mood (rare), just match skin tone
+            if (matching.length < 1) {
+                matching = allProducts.filter(p => p.tones.includes(userSkinTone));
+            }
+
+            return matching;
+        }
+
+        // Core Generation Logic
+        function generateMakeupRoutine() {
+            // Update Title and Headers
+            document.getElementById('result-title').innerText = moodTitles[userMood].title;
+            document.getElementById('result-desc').innerText = moodTitles[userMood].desc;
+
+            const skinDict = { 'Acik': 'Açık/Beyaz', 'Bugday': 'Buğday', 'Esmer': 'Esmer/Koyu' };
+            const hairDict = { 'Sari': 'Sarı', 'Kumral': 'Kumral', 'KahveSiyah': 'Koyu', 'Kizil': 'Kızıl' };
+            
+            document.getElementById('user-profile-summary').innerHTML = 
+                `<strong>Profilin:</strong> ${skinDict[userSkinTone]} Ten, ${hairDict[userHairColor]} Saç. <br>
+                 <em>Bu seçeneklere göre en uygun tonlar aşağıda derlendi.</em>`;
+
+            renderCategories();
+        }
+
+        function reGenerateResults() {
+            // User requested different random options for the same mood and profile
+            renderCategories();
+            
+            // Re-collapse everything visually, or maybe open them with a slight animation
+            const container = document.getElementById('makeup-items-container');
+            container.style.opacity = '0';
+            setTimeout(() => {
+                container.style.opacity = '1';
+                container.style.transition = 'opacity 0.4s ease';
+            }, 50);
+        }
+
+        function renderCategories() {
+            const container = document.getElementById('makeup-items-container');
+            container.innerHTML = '';
+
+            const categories = [
+                { id: 'face', title: 'Yüz / Ten Makyajı', hint: 'Cilt makyajı önerileri için tıkla' },
+                { id: 'eyes', title: 'Göz Makyajı', hint: 'Far ve eyeliner önerileri için tıkla' },
+                { id: 'lips', title: 'Dudak', hint: 'Ruj ve renklendirici önerileri için tıkla' }
+            ];
+
+            categories.forEach(cat => {
+                // Get suitable products and pick 1-3 random ones
+                const suitable = getSuitableProducts(cat.id);
+                const randomPicks = getRandomItems(suitable, Math.min(suitable.length, 3));
+
+                if (randomPicks.length === 0) return;
+
+                // Create Item UI
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'makeup-item';
+                
+                // Header (Clickable)
+                const headerHtml = `
+                    <div class="makeup-header">
+                        <div>
+                            <div class="makeup-title">${cat.title}</div>
+                            <div class="makeup-desc">Senin için ${randomPicks.length} harika seçenek bulduk</div>
+                        </div>
+                        <div class="click-hint">Seçenekleri Gör ▼</div>
+                    </div>
+                `;
+
+                // Hidden Options
+                let optionsHtml = '<div class="shade-options">';
+                randomPicks.forEach(product => {
+                    optionsHtml += `
+                        <div class="shade-card">
+                            <div class="shade-name">${product.name}</div>
+                            <div class="shade-brand">
+                                <span>Kategori: ${product.type}</span>
+                                <span class="tag">${product.brand}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+                optionsHtml += '</div>';
+
+                itemDiv.innerHTML = headerHtml + optionsHtml;
+
+                // Toggle click event
+                itemDiv.addEventListener('click', function() {
+                    const optionsDiv = this.querySelector('.shade-options');
+                    const isVisible = optionsDiv.style.display === 'block';
+                    
+                    // Collapse all others
+                    document.querySelectorAll('.shade-options').forEach(el => el.style.display = 'none');
+                    document.querySelectorAll('.click-hint').forEach(el => el.innerText = 'Seçenekleri Gör ▼');
+                    
+                    if (!isVisible) {
+                        optionsDiv.style.display = 'block';
+                        this.querySelector('.click-hint').innerText = 'Kapat ▲';
+                    }
+                });
+
+                container.appendChild(itemDiv);
+            });
+        }
+
+        // Init
+        window.onload = setupSelections;
+    </script>
+</body>
+</html>
